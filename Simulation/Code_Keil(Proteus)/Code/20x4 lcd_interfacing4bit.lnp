@@ -1,0 +1,5 @@
+"STARTUP.obj",
+"main.obj",
+"lcd.obj",
+"delay.obj" 
+TO "20x4 lcd_interfacing4bit" 

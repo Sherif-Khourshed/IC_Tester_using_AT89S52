@@ -1,0 +1,113 @@
+C51 COMPILER V9.60.0.0   LCD                                                               04/13/2020 03:35:04 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN lcd.OBJ
+COMPILER INVOKED BY: E:\Courses\8051\Keil\Install\C51\BIN\C51.EXE lcd.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS
+                    -(2)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #include "delay.h"
+   3          #include "lcd.h"
+   4          
+   5          void LCD_Init(void)
+   6          {
+   7   1       LCD_write_command(0x02);     //to reset  
+   8   1       LCD_write_command(0x28);       //2 lines and 5x7 matrix
+   9   1       LCD_write_command(0x0c);       //Display ON,cursor OFF
+  10   1       LCD_write_command(0x01);         //Clear Screen 
+  11   1       LCD_write_command(0x06);       //Increment cursor
+  12   1      }
+  13          
+  14          void LCD_Clear(void)
+  15          {
+  16   1        LCD_write_command(0x01);         //Clear Screen 
+  17   1      }
+  18          
+  19          /*function to write 8-bit data on LCD*/ 
+  20          void LCD_write_data(unsigned char value)
+  21           {
+  22   1         RS=1;                //selecting data register
+  23   1         Data_lines &= 0x0F;          //put zero on data lines 
+  24   1         Data_lines |=(value&0xF0);  //Write higher 4- bit of data
+  25   1         EN=1;
+  26   1         delay_time(1);
+  27   1         EN=0;
+  28   1      
+  29   1         Data_lines &= 0x0F;          //again put zero on data lines 
+  30   1         Data_lines |=((value<<4)&0xF0);  // Write lower 4- bit of data
+  31   1         EN=1;
+  32   1         delay_time(1);
+  33   1         EN=0;
+  34   1       }
+  35           /*function to write command on LCD*/
+  36          void LCD_write_command(unsigned char value)
+  37           {
+  38   1         RS=0;                //selecting command register
+  39   1         Data_lines &= 0x0F;          //put zero on data lines 
+  40   1         Data_lines |=(value&0xF0);  // Write higher 4- bit of data
+  41   1         EN=1;
+  42   1         delay_time(1);
+  43   1         EN=0;
+  44   1      
+  45   1         Data_lines &= 0x0F;          //again put zero on data lines 
+  46   1         Data_lines |=((value<<4)&0xF0);  // Write lower 4- bit of data
+  47   1         EN=1;
+  48   1         delay_time(1);
+  49   1         EN=0;
+  50   1       }
+  51           /*function to write string on LCD*/
+  52          void LCD_Send_String(unsigned char *s,int sLen)
+  53           {
+  54   1        while(sLen>0)
+C51 COMPILER V9.60.0.0   LCD                                                               04/13/2020 03:35:04 PAGE 2   
+
+  55   1          {
+  56   2           LCD_write_data(*s++);  //sending string on LCD
+  57   2           sLen--;
+  58   2          }
+  59   1       }
+  60           
+  61           void LCD_goToRowColumn(unsigned char row, unsigned char col)
+  62           {
+  63   1        unsigned char address;
+  64   1         switch(row)
+  65   1         {
+  66   2          case 0: /* Line one */
+  67   2          address = col + 0x00;
+  68   2          break;
+  69   2          case 1: /* Line two */
+  70   2          address = col + 0x40;
+  71   2          break;
+  72   2          case 2: /* Line three */
+  73   2          address = col + 0x10;
+  74   2          break;
+  75   2          case 3: /* Line four */
+  76   2          address = col + 0x50;
+  77   2         }
+  78   1         LCD_write_command(address | 0x80);
+  79   1       }
+  80           
+  81           void LCD_displayStringRowColumn(unsigned char row, unsigned char col, unsigned char *s,int sLen)
+  82          {
+  83   1        LCD_goToRowColumn(row, col);  /* Go to the required address */
+  84   1        LCD_Send_String(s, sLen);     /* Display the string */
+  85   1      }
+  86          
+  87           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    244    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

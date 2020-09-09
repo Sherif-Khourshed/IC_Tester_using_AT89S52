@@ -1,0 +1,38 @@
+C51 COMPILER V9.60.0.0   DELAY                                                             04/13/2020 03:35:04 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN delay.OBJ
+COMPILER INVOKED BY: E:\Courses\8051\Keil\Install\C51\BIN\C51.EXE delay.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TA
+                    -BS(2)
+
+line level    source
+
+   1          
+   2          /* Author           : Vaibhav Singhal (Firmware Developer)
+   3          Created date        : 21 Dec 2010
+   4          created file        : delay.c
+   5          Firmware Version    : 1.00 */
+   6          
+   7          /*function for genrating 1 msec delay*/
+   8          void delay_time (unsigned int time)
+   9          {
+  10   1        unsigned int i,j;
+  11   1         for(i=0;i<time;i++)
+  12   1           for(j=0;j<112;j++);
+  13   1      }
+  14          /* ©Copyright embeddedsolutions4u.blogspot.com */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
