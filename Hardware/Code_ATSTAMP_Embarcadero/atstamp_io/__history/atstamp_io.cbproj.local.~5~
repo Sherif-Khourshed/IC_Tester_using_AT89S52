@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/07/27 04:08:56.000.854,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2018/07/27 04:08:56.000.992,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2018/07/29 22:08:05.000.076,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2018/07/29 22:08:05.000.128,=C:\Users\user\Documents\Embarcadero\Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2018/07/29 22:09:38.000.224,C:\Projects_Materials\ATSTAMP\atstamp_io\atstamp_io.cpp=C:\Users\user\Documents\Embarcadero\Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2018/07/29 22:09:41.000.391,C:\Projects_Materials\ATSTAMP\atstamp_io\atstamp_io.h=C:\Users\user\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2018/07/29 22:09:46.000.473,C:\Projects_Materials\ATSTAMP\atstamp_io\atstamp_io.cbproj=C:\Users\user\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>2018/07/29 22:10:46.000.884,=C:\Projects_Materials\ATSTAMP\atstamp_io\ATSTAMP.lib</Transaction>
+  </Transactions>
+</BorlandProject>

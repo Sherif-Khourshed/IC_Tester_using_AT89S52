@@ -1,0 +1,419 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <Reg52.H>
+   2          #include <stdio.h>
+   3          
+   4          //port zero
+   5          sbit pin1 = P0^0;
+   6          sbit pin2 = P0^1;
+   7          sbit pin3= P0^2;
+   8          sbit pin4 = P0^3;
+   9          sbit pin5 = P0^4;
+  10          sbit pin6 = P0^5;
+  11          sbit pin7 = P0^6;
+  12          //sbitpin8 = P0^7; GND
+  13          
+  14          //port 2
+  15          sbit pin9 = P2^0;
+  16          sbit pin10 = P2^1;
+  17          sbit pin11 = P2^2;
+  18          sbit pin12 = P2^3;
+  19          sbit pin13 = P2^4;
+  20          sbit pin14 = P2^5;
+  21          sbit pin15 = P2^6;
+  22          //sbitpin16 = P2^7; VCC
+  23          
+  24          sbit ledred = P1^0; // for defect IC
+  25          sbit ledyellow = P1^1; //for 4098 IC
+  26          sbit ledgreen = P1^2; //for 74265 IC
+  27          
+  28          int flag; // 0 for defect ic 1 for 74265 ic 2 for 4098 ic
+  29          
+  30          void IC_74265(void);
+  31          void delay(void);
+  32          void IC_4098(void);
+  33          
+  34          void main (void)
+  35          {
+  36   1      
+  37   1      
+  38   1        
+  39   1        while(1)
+  40   1        {
+  41   2                
+  42   2      
+  43   2        while(1)
+  44   2        { 
+  45   3          IC_74265(); 
+  46   3          if(flag == 1)
+  47   3          { 
+  48   4          
+  49   4              ledgreen = 1;
+  50   4              delay();
+  51   4              delay();
+  52   4              delay();
+  53   4              ledgreen = 0;
+  54   4              delay();
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 2   
+
+  55   4              delay();
+  56   4              delay();
+  57   4            
+  58   4            
+  59   4            
+  60   4            
+  61   4          
+  62   4              break;
+  63   4          }
+  64   3          
+  65   3          IC_4098();
+  66   3          if(flag == 2)
+  67   3          { 
+  68   4          
+  69   4              ledyellow = 1;
+  70   4              delay();
+  71   4              delay();
+  72   4              delay();
+  73   4              ledyellow = 0;
+  74   4              delay();
+  75   4              delay();
+  76   4              delay();
+  77   4            
+  78   4            
+  79   4          
+  80   4            break;
+  81   4          } 
+  82   3          if(flag == 0)
+  83   3          {
+  84   4              ledred = 1;
+  85   4              delay();
+  86   4              delay();
+  87   4              delay();
+  88   4            
+  89   4              ledred = 0;
+  90   4              
+  91   4              delay();
+  92   4              delay();
+  93   4              delay();
+  94   4             break; 
+  95   4          } 
+  96   3          
+  97   3          
+  98   3          
+  99   3        }
+ 100   2          
+ 101   2          
+ 102   2       }
+ 103   1        
+ 104   1      }
+ 105          
+ 106          
+ 107          
+ 108          void delay(void)
+ 109          {
+ 110   1      unsigned int x,y ;
+ 111   1      for(x=0 ; x<1000 ; x++)
+ 112   1      {
+ 113   2        for(y=0 ; y<100 ; y++);
+ 114   2      }
+ 115   1      
+ 116   1      }
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 3   
+
+ 117          
+ 118          
+ 119          
+ 120          
+ 121          void IC_74265(void)
+ 122          {
+ 123   1            
+ 124   1          // used as o/p pins
+ 125   1          pin2 = pin3 = pin6 = pin7 = pin9 = pin10 = pin13 = pin14 = 1;
+ 126   1        
+ 127   1        
+ 128   1          pin1 = 0;
+ 129   1          pin15 = 0;
+ 130   1         
+ 131   1          
+ 132   1          if( (pin2 != 0) || ( !(pin3) != 0) )
+ 133   1          {
+ 134   2          
+ 135   2              flag = 0;
+ 136   2              
+ 137   2             
+ 138   2            
+ 139   2          
+ 140   2          }else
+ 141   1          {
+ 142   2                  
+ 143   2            if( (pin14 != 0) || ( !(pin13) != 0) )
+ 144   2            {
+ 145   3          
+ 146   3                flag = 0;
+ 147   3              
+ 148   3            
+ 149   3          
+ 150   3            }else
+ 151   2            {
+ 152   3                pin1 = 1;
+ 153   3                pin15 = 1;  
+ 154   3                if( (pin2 != 1) || ( !(pin3) != 1) )
+ 155   3                {
+ 156   4          
+ 157   4                  flag = 0;
+ 158   4              
+ 159   4                          
+ 160   4          
+ 161   4                }else
+ 162   3                { 
+ 163   4                  if( (pin14 != 1) || ( !(pin13) != 1) )
+ 164   4                  {
+ 165   5          
+ 166   5                    flag = 0;
+ 167   5              
+ 168   5              
+ 169   5              
+ 170   5          
+ 171   5                  }else
+ 172   4                  {
+ 173   5                      
+ 174   5                      pin4 = 0;
+ 175   5                      pin5 = 0;
+ 176   5                      pin11 = 0;
+ 177   5                      pin12 = 0;
+ 178   5                        
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 4   
+
+ 179   5                      if( ( pin6 != ( pin4 && pin5 ) ) || ( pin7 !=  !( pin4 && pin5 ) ) )
+ 180   5                      {
+ 181   6                          flag = 0;
+ 182   6              
+ 183   6                      
+ 184   6                        
+ 185   6                      
+ 186   6                      }else
+ 187   5                      {
+ 188   6                      
+ 189   6                      
+ 190   6                          if( ( pin10 != ( pin11 && pin12 ) ) || ( pin9 !=  !( pin11 && pin12 ) ) )
+ 191   6                          {
+ 192   7                              flag = 0;
+ 193   7              
+ 194   7                        
+ 195   7                    
+ 196   7                          
+ 197   7                          }else
+ 198   6                          {
+ 199   7                          
+ 200   7                              pin4 = 0;
+ 201   7                              pin5 = 1;
+ 202   7                              pin11 = 0;
+ 203   7                              pin12 = 1;
+ 204   7                        
+ 205   7                              if( ( pin6 != ( pin4 && pin5 ) ) || ( pin7 !=  !( pin4 && pin5 ) ) )
+ 206   7                              {
+ 207   8                                  flag = 0;
+ 208   8                            
+ 209   8                        
+ 210   8                      
+ 211   8                              }else
+ 212   7                              {
+ 213   8                      
+ 214   8                      
+ 215   8                                if( ( pin10 != ( pin11 && pin12 ) ) || ( pin9 !=  !( pin11 && pin12 ) ) )
+ 216   8                                {
+ 217   9                                    flag = 0;
+ 218   9                        
+ 219   9                    
+ 220   9                                    
+ 221   9                                }else
+ 222   8                                {
+ 223   9                                
+ 224   9                                    pin4 = 1;
+ 225   9                                    pin5 = 0;
+ 226   9                                    pin11 = 1;
+ 227   9                                    pin12 = 0;
+ 228   9                        
+ 229   9                                    if( ( pin6 != ( pin4 && pin5 ) ) || ( pin7 !=  !( pin4 && pin5 ) ) )
+ 230   9                                    {
+ 231  10                                        flag = 0;
+ 232  10              
+ 233  10                      
+ 234  10                        
+ 235  10                      
+ 236  10                                    }else
+ 237   9                                    {
+ 238  10                      
+ 239  10                      
+ 240  10                                        if( ( pin10 != ( pin11 && pin12 ) ) || ( pin9 !=  !( pin11 && pin12 ) ) )
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 5   
+
+ 241  10                                        {
+ 242  11                                            flag = 0;
+ 243  11              
+ 244  11                    
+ 245  11                    
+ 246  11                                        
+ 247  11                                        }else
+ 248  10                                        {
+ 249  11                                        
+ 250  11                                            pin4 = 1;
+ 251  11                                            pin5 = 1;
+ 252  11                                            pin11 = 1;
+ 253  11                                            pin12 = 1;
+ 254  11                        
+ 255  11                                            if( ( pin6 != ( pin4 && pin5 ) ) || ( pin7 !=  !( pin4 && pin5 ) ) )
+ 256  11                                            {
+ 257  12                                                flag = 0;
+ 258  12              
+ 259  12                    
+ 260  12                        
+ 261  12                      
+ 262  12                                            }else
+ 263  11                                            {
+ 264  12                      
+ 265  12                      
+ 266  12                                                if( ( pin10 != ( pin11 && pin12 ) ) || ( pin9 !=  !( pin11 && pin12 ) ) )
+ 267  12                                                {
+ 268  13                                                    flag = 0;
+ 269  13                        
+ 270  13                    
+ 271  13                                              
+ 272  13                                                }else
+ 273  12                                                {
+ 274  13                                                
+ 275  13                                                      flag = 1;
+ 276  13                                                                              
+ 277  13                                                
+ 278  13                                                }   
+ 279  12                                        
+ 280  12                                        
+ 281  12                                        
+ 282  12                                        
+ 283  12                                        
+ 284  12                                        }
+ 285  11                                
+ 286  11                                
+ 287  11                                
+ 288  11                                
+ 289  11                                
+ 290  11                                    }
+ 291  10                                  
+ 292  10                          
+ 293  10                          
+ 294  10                          
+ 295  10                          
+ 296  10                                  }   
+ 297   9                      
+ 298   9                      
+ 299   9                      
+ 300   9                            }
+ 301   8                  
+ 302   8                  
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 6   
+
+ 303   8                  
+ 304   8                      }
+ 305   7                      
+ 306   7            
+ 307   7                    } 
+ 308   6              
+ 309   6            
+ 310   6                  }   
+ 311   5          
+ 312   5            
+ 313   5                }
+ 314   4          
+ 315   4              }
+ 316   3              
+ 317   3            }   
+ 318   2      
+ 319   2          }
+ 320   1          
+ 321   1      }
+ 322          
+ 323          
+ 324          void IC_4098(void)
+ 325          {
+ 326   1      
+ 327   1          pin6 = 1; // input Q PIN
+ 328   1          pin10 = 1; // input Q PIN
+ 329   1          
+ 330   1          pin1 = 1;
+ 331   1          pin3 = 1;//reset pin
+ 332   1          pin5 = 1;//-ve trigger
+ 333   1        
+ 334   1        
+ 335   1          pin4 = 1;//+ve trigger
+ 336   1        
+ 337   1          
+ 338   1        
+ 339   1        
+ 340   1          if(pin6 == 1)
+ 341   1          {
+ 342   2                pin15 = 1;
+ 343   2                pin13 = 1;//reset
+ 344   2                pin11= 1; //-ve trigger
+ 345   2                
+ 346   2            
+ 347   2                pin12 = 1;//+ve trigger
+ 348   2      
+ 349   2            
+ 350   2                if(pin10 == 1)
+ 351   2                {
+ 352   3                      flag = 2;
+ 353   3            
+ 354   3                            
+ 355   3                      
+ 356   3                
+ 357   3                }else
+ 358   2                {
+ 359   3                
+ 360   3                      flag = 0;
+ 361   3              
+ 362   3                
+ 363   3                
+ 364   3                }
+C51 COMPILER V9.60.0.0   MAIN                                                              04/07/2020 14:47:49 PAGE 7   
+
+ 365   2          
+ 366   2          
+ 367   2          }else
+ 368   1          {
+ 369   2          
+ 370   2                flag = 0;
+ 371   2              
+ 372   2              
+ 373   2          
+ 374   2          
+ 375   2          }
+ 376   1        
+ 377   1              
+ 378   1            
+ 379   1          pin4 = 0;
+ 380   1          pin12 = 0;
+ 381   1      
+ 382   1      }
+ 383          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    688    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

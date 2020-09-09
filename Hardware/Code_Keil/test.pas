@@ -1,0 +1,10 @@
+#NAME TEST1
+
+#PROGRAM
+
+BEGIN
+
+WRITE ('IC-Tester V1.3');
+WAIT;
+
+END.
